@@ -1,10 +1,20 @@
-<template>
+<template >
+  <nav>
+
+    <a href="/products">Products</a>
+    <a href="#">Orders</a>
+    <a href="#">Completed Orders</a>
+    <a href="#">Logout</a>
+  </nav>
+
     <h1>Products</h1>
-      <div v-for="product in products" :key="product.id">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p>Price: {{ product.price }}</p>
-      </div>
+
+    <div class='products' v-for="product in products" :key="product.id">
+      <h3>Name: {{ product.name }}</h3>
+      <p>Description: {{ product.description }}</p>
+      <p>Price: {{ product.price }}</p>
+    </div>
+
 </template>
 
 <script>
@@ -41,5 +51,27 @@ export default {
 </script>
 
 <style scoped>
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.products{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 35px;
+  margin-top: 50px;
+}
 </style>
