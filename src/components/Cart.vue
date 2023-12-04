@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>Cart</h1>
-
-    <div class="cart-item" v-for="item in cartItems" :key="item.id">
+    <div class="products" v-for="item in cartItems" :key="item.id">
       <h3>Name: {{ item.name }}</h3>
       <p>Description: {{ item.description }}</p>
       <p>Price: {{ item.price }}</p>
+      <button @click="removeFromCart(item)">Remove from Cart</button>
     </div>
   </div>
 </template>
@@ -22,42 +22,47 @@ export default {
     if (savedItems) {
       this.cartItems = JSON.parse(savedItems);
     }
+  },
+  methods: {
+    removeFromCart(item) {
+      this.cartItems = this.cartItems.filter(product => product.id !== item.id);
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    }
   }
 };
 </script>
 
-<!--<script>-->
-<!--export default {-->
-<!--  data() {-->
-<!--    return {-->
-<!--      cartItems: [],-->
-<!--    };-->
-<!--  },-->
-<!--  mounted() {-->
-<!--    this.fetchCartItems();-->
-<!--  },-->
-<!--  methods: {-->
-<!--    async fetchCartItems() {-->
-<!--      try {-->
-<!--        const response = await fetch("https://jurapro.bhuser.ru/api-shop/cart");-->
-<!--        const data = await response.json();-->
-
-<!--        this.cartItems = data.data;-->
-<!--      } catch (error) {-->
-<!--        console.error("Error fetching cart items:", error);-->
-<!--      }-->
-<!--    },-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
-
-<style scoped>
-
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.products{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 35px;
+  margin-top: 50px;
+}
+button{
+  width: 175px;
+  height: 40px;
+  border-radius: 15px;
+  background-color: #4CAF50
+}
+button:hover{
+  cursor: pointer;
+}
 </style>
-<!--    <ul>-->
-<!--      <li v-for="item in cartItems" :key="item.id">-->
-<!--        <h2>{{ item.name }}</h2>-->
-<!--        <p>{{ item.description }}</p>-->
-<!--        <p>Price: ${{ item.price }}</p>-->
-<!--      </li>-->
-<!--    </ul>-->
