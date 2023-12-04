@@ -1,10 +1,8 @@
 <template>
   <nav>
-
     <a href="/products">Products</a>
     <a href="#">Orders</a>
     <a href="#">Completed Orders</a>
-
   </nav>
   <div class="login">
     <h1>Login</h1>
@@ -12,7 +10,6 @@
     <input class="password" v-model="password" type="password" placeholder="Password">
     <button @click="login">Login</button>
   </div>
-
 </template>
 
 <script>
@@ -40,8 +37,8 @@ export default {
         const data = await response.json();
         if (response.ok) {
           this.userToken = data.data.user_token;
-          console.log(this.userToken);
-          // сохранить токен в localStorage или Vuex store
+          localStorage.setItem('userToken', this.userToken);
+          // сохраняем токен в localStorage
         } else {
           // обработка ошибки аутентификации
         }
@@ -51,7 +48,6 @@ export default {
     }
   }
 };
-
 </script>
 
 <style scoped>
