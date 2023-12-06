@@ -6,6 +6,7 @@
       <p>Description: {{ item.description }}</p>
       <p>Price: {{ item.price }}</p>
       <button @click="removeFromCart(item)">Remove from Cart</button>
+      <button @click="moveToOrder(item)">Move to Order</button>
     </div>
   </div>
 </template>
@@ -14,7 +15,8 @@
 export default {
   data() {
     return {
-      cartItems: []
+      cartItems: [],
+      orderItems:[],
     };
   },
   created() {
@@ -22,15 +24,27 @@ export default {
     if (savedItems) {
       this.cartItems = JSON.parse(savedItems);
     }
+    const savedCartItems = localStorage.getItem('cart');
+    if(savedCartItems){
+      this.cartItems = JSON.parse(savedCartItems)
+    }
   },
   methods: {
     removeFromCart(item) {
       this.cartItems = this.cartItems.filter(product => product.id !== item.id);
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    },
+    moveToOrder(item){
+      this.orderItems.push(item);
+      console.log(this.orderItems);
+      this.cartItems = this.cartItems.filter(product => product.id !== item.id);
+      localStorage.setItem('order', JSON.stringify(this.orderItems));
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
     }
   }
 };
 </script>
+
 
 <style>
 *{
