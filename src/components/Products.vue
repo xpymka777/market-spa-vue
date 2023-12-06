@@ -1,4 +1,12 @@
 <template>
+  <nav>
+    <a href="/login" v-if="!savedToken">Login</a>
+    <a href="/logout" v-if="savedToken">Logout</a>
+    <a href="/products">Products</a>
+    <a href="/order">Order</a>
+    <a href="/cart">Cart</a>
+    <a href="/registration" v-if="!savedToken">Registration</a>
+  </nav>
   <div>
     <h1>Products</h1>
 
@@ -15,7 +23,8 @@
 export default {
   data() {
     return {
-      products: []
+      products: [],
+      // savedToken: null,
     };
   },
   created() {
@@ -46,6 +55,10 @@ export default {
         // обработка ошибки сети
       }
     },
+    // getTokenFromLocalStorage() {
+    //   this.savedToken = localStorage.getItem('userToken');
+    //   console.log(this.savedToken)
+    // },
     addToCart(product) {
       let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
       cartItems.push(product);
@@ -63,10 +76,20 @@ export default {
 }
 nav{
   width: 100%;
+  background-color: orange;
   height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  border-radius: 0 0 5px 5px;
+  padding: 15px;
+}
+nav>a{
+  color: black;
+  text-decoration: none;
+}
+nav>a:hover{
+  color:white;
 }
 .products{
   display: flex;

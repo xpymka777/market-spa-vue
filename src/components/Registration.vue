@@ -1,4 +1,12 @@
 <template>
+  <nav>
+    <a href="/login">Login</a>
+    <a href="/logout">Logout</a>
+    <a href="/products">Products</a>
+    <a href="/order">Order</a>
+    <a href="/cart">Cart</a>
+    <a href="/registration">Registration</a>
+  </nav>
   <h1>Registration</h1>
   <div>
     <form @submit.prevent="registerUser">
@@ -83,5 +91,22 @@ button{
   width: 175px;
   height: 40px;
   border-radius: 15px;
+}
+nav{
+  width: 100%;
+  background-color: orange;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 0 0 5px 5px;
+  padding: 15px;
+}
+nav>a{
+  color: black;
+  text-decoration: none;
+}
+nav>a:hover{
+  color:white;
 }
 </style>

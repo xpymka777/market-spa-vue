@@ -1,4 +1,12 @@
 <template>
+  <nav>
+    <a href="/login">Login</a>
+    <a href="/logout">Logout</a>
+    <a href="/products">Products</a>
+    <a href="/order">Order</a>
+    <a href="/cart">Cart</a>
+    <a href="/registration">Registration</a>
+  </nav>
   <div>
     <h1>Cart</h1>
     <div class="products" v-for="item in cartItems" :key="item.id">
@@ -78,5 +86,22 @@ button{
 }
 button:hover{
   cursor: pointer;
+}
+nav{
+  width: 100%;
+  background-color: orange;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 0 0 5px 5px;
+  padding: 15px;
+}
+nav>a{
+  color: black;
+  text-decoration: none;
+}
+nav>a:hover{
+  color:white;
 }
 </style>
