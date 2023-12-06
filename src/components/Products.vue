@@ -55,6 +55,7 @@ export default {
         // обработка ошибки сети
       }
     },
+
     // getTokenFromLocalStorage() {
     //   this.savedToken = localStorage.getItem('userToken');
     //   console.log(this.savedToken)

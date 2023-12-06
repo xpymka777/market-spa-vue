@@ -1,4 +1,5 @@
 <template>
+
   <nav>
     <a href="/login">Login</a>
     <a href="/logout">Logout</a>

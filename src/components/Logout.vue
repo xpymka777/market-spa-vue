@@ -1,4 +1,5 @@
 <template>
+
   <h1>Are you sure you want to go out?</h1>
   <div>
     <button @click="logout">Yes</button>
