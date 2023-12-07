@@ -1,12 +1,11 @@
 <template>
-
   <nav>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    <a v-if="!userToken" href="/login">Login</a>
+    <a v-if="userToken" href="/logout">Logout</a>
     <a href="/products">Products</a>
     <a href="/order">Order</a>
     <a href="/cart">Cart</a>
-    <a href="/registration">Registration</a>
+    <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
   <h1>Registration</h1>
   <div>
@@ -24,6 +23,7 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <button type="submit">Register</button>
+      <a href="/products">Don't want to register? You can return to the main page.</a>
     </form>
   </div>
 </template>
@@ -35,7 +35,13 @@ export default {
       fio: '',
       email: '',
       password: '',
+      userToken: localStorage.getItem('userToken') || ''
     };
+  },
+  created() {
+    if(this.userToken){
+      this.$router.push('/products');
+    }
   },
   methods: {
     async registerUser() {
@@ -63,6 +69,10 @@ export default {
       } catch (error) {
         console.error('Error during registration:', error);
       }
+    },
+    getTokenFromLocalStorage() {
+      this.savedToken = localStorage.getItem('userToken');
+      console.log(this.savedToken)
     },
   },
 };

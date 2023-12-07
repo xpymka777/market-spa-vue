@@ -1,12 +1,11 @@
 <template>
-
   <nav>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    <a v-if="!userToken" href="/login">Login</a>
+    <a v-if="userToken" href="/logout">Logout</a>
     <a href="/products">Products</a>
     <a href="/order">Order</a>
     <a href="/cart">Cart</a>
-    <a href="/registration">Registration</a>
+    <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
   <div>
     <h1>Cart</h1>
@@ -26,6 +25,7 @@ export default {
     return {
       cartItems: [],
       orderItems:[],
+      userToken: localStorage.getItem('userToken') || ''
     };
   },
   created() {
@@ -36,6 +36,9 @@ export default {
     const savedCartItems = localStorage.getItem('cart');
     if(savedCartItems){
       this.cartItems = JSON.parse(savedCartItems)
+    }
+    if(!this.userToken){
+      this.$router.push('/login');
     }
   },
   methods: {
@@ -49,7 +52,11 @@ export default {
       this.cartItems = this.cartItems.filter(product => product.id !== item.id);
       localStorage.setItem('order', JSON.stringify(this.orderItems));
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    }
+    },
+    getTokenFromLocalStorage() {
+      this.savedToken = localStorage.getItem('userToken');
+      console.log(this.savedToken)
+    },
   }
 };
 </script>

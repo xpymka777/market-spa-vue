@@ -1,18 +1,18 @@
 <template>
-
   <nav>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    <a v-if="!userToken" href="/login">Login</a>
+    <a v-if="userToken" href="/logout">Logout</a>
     <a href="/products">Products</a>
     <a href="/order">Order</a>
     <a href="/cart">Cart</a>
-    <a href="/registration">Registration</a>
+    <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
   <div class="login">
     <h1>Login</h1>
     <input class="email" v-model="email" type="email" placeholder="Email">
     <input class="password" v-model="password" type="password" placeholder="Password">
     <button @click="login">Login</button>
+    <a href="/products">Back</a>
   </div>
 </template>
 
@@ -22,8 +22,13 @@ export default {
     return {
       email: '',
       password: '',
-      userToken: ''
+      userToken: localStorage.getItem('userToken') || ''
     };
+  },
+  created() {
+    if(this.userToken){
+      this.$router.push('/products');
+    }
   },
   methods: {
     async login() {
@@ -50,7 +55,7 @@ export default {
       } catch (error) {
         // обработка ошибки сети
       }
-    }
+    },
   }
 };
 </script>

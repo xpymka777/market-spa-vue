@@ -1,11 +1,11 @@
 <template>
   <nav>
-    <a href="/login" v-if="!savedToken">Login</a>
-    <a href="/logout" v-if="savedToken">Logout</a>
+    <a v-if="!userToken" href="/login">Login</a>
+    <a v-if="userToken" href="/logout">Logout</a>
     <a href="/products">Products</a>
     <a href="/order">Order</a>
     <a href="/cart">Cart</a>
-    <a href="/registration" v-if="!savedToken">Registration</a>
+    <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
   <div>
     <h1>Products</h1>
@@ -14,7 +14,7 @@
       <h3>Name: {{ product.name }}</h3>
       <p>Description: {{ product.description }}</p>
       <p>Price: {{ product.price }}</p>
-      <button @click="addToCart(product)">Add to Cart</button>
+      <button v-if="userToken" @click="addToCart(product)">Add to Cart</button>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       products: [],
-      // savedToken: null,
+      userToken: localStorage.getItem('userToken') || ''
     };
   },
   created() {
@@ -55,11 +55,12 @@ export default {
         // обработка ошибки сети
       }
     },
-
-    // getTokenFromLocalStorage() {
-    //   this.savedToken = localStorage.getItem('userToken');
-    //   console.log(this.savedToken)
-    // },
+    //проверка на наличие токена для отображения ссылок в блоке навигации
+    //здесь ещё надо сделать условие, которое будет проверять наличие токена и редиректить, если токена нет.
+    getTokenFromLocalStorage() {
+      this.savedToken = localStorage.getItem('userToken');
+      console.log(this.savedToken)
+    },
     addToCart(product) {
       let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
       cartItems.push(product);

@@ -1,21 +1,24 @@
 <template>
-
   <nav>
-    <a href="/login">Login</a>
-    <a href="/logout">Logout</a>
+    <a v-if="!userToken" href="/login">Login</a>
+    <a v-if="userToken" href="/logout">Logout</a>
     <a href="/products">Products</a>
     <a href="/order">Order</a>
     <a href="/cart">Cart</a>
-    <a href="/registration">Registration</a>
+    <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
+  <h1>Order</h1>
+  <br>
+  <div v-if="!orderedItems" class="space">
+    <h2>The cart is empty</h2>
+  </div>
   <div>
-    <h1>Order</h1>
-    <div class="ordered-products" v-for="item in orderedItems" :key="item.id">
+    <div v-if="orderedItems" class="ordered-products" v-for="item in orderedItems" :key="item.id">
       <h3>Name: {{ item.name }}</h3>
       <p>Description: {{ item.description }}</p>
       <p>Price: {{ item.price }}</p>
     </div>
-    <button @click="payForOrder">Pay for the order</button>
+    <button v-if="orderedItems" @click="payForOrder">Pay for the order</button>
   </div>
 </template>
 
@@ -25,7 +28,7 @@ export default {
     return {
       orderedItems: [],
       payedItems: [],
-
+      userToken: localStorage.getItem('userToken') || ''
     };
   },
   created() {
@@ -37,6 +40,9 @@ export default {
     if (savedCompletedOrders) {
       this.payedItems = JSON.parse(savedCompletedOrders);
     }
+    if(!this.userToken){
+      this.$router.push('/login');
+    }
   },
   methods: {
     payForOrder() {
@@ -44,7 +50,11 @@ export default {
       this.orderedItems = []; // Clear the orderedItems array
       localStorage.setItem('order', JSON.stringify(this.orderedItems));
       localStorage.setItem('payedItems', JSON.stringify(this.payedItems));
-    }
+    },
+    getTokenFromLocalStorage() {
+      this.savedToken = localStorage.getItem('userToken');
+      console.log(this.savedToken)
+    },
   }
 };
 </script>

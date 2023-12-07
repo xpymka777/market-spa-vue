@@ -9,12 +9,22 @@
 
 <script>
 export default {
+  data(){
+    return{
+      userToken: localStorage.getItem('userToken') || ''
+    }
+  },
   methods: {
     logout() {
       localStorage.removeItem('userToken'); // Remove the userToken from localStorage
       window.location.href = '/products'; // Redirect to the products page
     }
-  }
+  },
+  created() {
+    if(!this.userToken){
+      this.$router.push('/products');
+    }
+  },
 };
 </script>
 
