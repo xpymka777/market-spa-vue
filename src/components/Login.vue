@@ -74,7 +74,8 @@ nav{
   justify-content: space-around;
 }
 a{
-
+  color: whitesmoke;
+  text-decoration: none;
 }
 .login{
   background-color: #4CAF50;

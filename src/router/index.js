@@ -10,12 +10,11 @@ import Logout from "@/components/Logout.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //
-    //   path:'/',
-    //   name:'Products',
-    //   component:Products
-    // },
+    {
+      path:'/',
+      name:'Products',
+      component:Products
+    },
     {
       path: '/login',
       name: 'Login',

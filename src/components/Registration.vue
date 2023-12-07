@@ -7,7 +7,11 @@
     <a href="/cart">Cart</a>
     <a v-if="!userToken" href="/registration">Registration</a>
   </nav>
+  <br>
+  <br>
   <h1>Registration</h1>
+  <br>
+  <br>
   <div>
     <form @submit.prevent="registerUser">
       <div>
@@ -23,7 +27,7 @@
         <input type="password" id="password" v-model="password" required>
       </div>
       <button type="submit">Register</button>
-      <a href="/products">Don't want to register? You can return to the main page.</a>
+      <a class="back" href="/products">Don't want to register? You can return to the main page.</a>
     </form>
   </div>
 </template>
@@ -119,5 +123,12 @@ nav>a{
 }
 nav>a:hover{
   color:white;
+}
+.back{
+  color: black;
+  text-decoration: none;
+}
+.back:hover{
+  color: #54f181;
 }
 </style>
