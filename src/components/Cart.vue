@@ -48,7 +48,7 @@ export default {
     },
     moveToOrder(item){
       this.orderItems.push(item);
-      console.log(this.orderItems);
+      //console.log(this.orderItems);
       this.cartItems = this.cartItems.filter(product => product.id !== item.id);
       localStorage.setItem('order', JSON.stringify(this.orderItems));
       localStorage.setItem('cart', JSON.stringify(this.cartItems));

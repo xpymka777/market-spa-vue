@@ -66,9 +66,7 @@ export default {
         if (response.status === 201) {
           const data = await response.json();
           console.log('Registration successful. User Token:', data.data.user_token);
-          // Optionally, you can redirect to a new page or perform other actions on successful registration.
         } else {
-          // Handle other status codes or errors
           console.error('Registration failed:', response.statusText);
         }
       } catch (error) {

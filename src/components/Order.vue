@@ -46,8 +46,8 @@ export default {
   },
   methods: {
     payForOrder() {
-      this.payedItems.push([...this.orderedItems]); // Push a copy of the orderedItems array to payedItems
-      this.orderedItems = []; // Clear the orderedItems array
+      this.payedItems.push([...this.orderedItems]); // Отправьте копию массива orderItems в payedItems.
+      this.orderedItems = []; // Очистить массив orderedItems
       localStorage.setItem('order', JSON.stringify(this.orderedItems));
       localStorage.setItem('payedItems', JSON.stringify(this.payedItems));
     },
