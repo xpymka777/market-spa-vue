@@ -11,6 +11,7 @@
   <br>
   <h1>Registration</h1>
   <br>
+
   <br>
   <div>
     <form @submit.prevent="registerUser">
